@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== Archivo de configuración ================================== -->
+
+<faces-config version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+    
+    <!-- Managed beans del sistema -->
+    <managed-bean>
+        <description>Managed bean encargado de la autenticación de los usuarios en el sistema</description>
+        <managed-bean-name>loginBean</managed-bean-name>
+        <managed-bean-class>com.losalpes.beans.LoginBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <description>Managed bean que se encarga del catálogo en el sistema</description>
+        <managed-bean-name>catalogoBean</managed-bean-name>
+        <managed-bean-class>com.losalpes.beans.CatalogoBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+    <!-- Reglas de navegación -->
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>administrador</from-outcome>
+            <to-view-id>/catalogo.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/index.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+</faces-config>

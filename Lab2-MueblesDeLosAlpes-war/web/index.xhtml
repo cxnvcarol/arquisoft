@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+    Document   : index
+    Created on : 14-jun-2011, 20:26:26
+    Author     : Juan Sebastián Urrego E.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/main-template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:param name="titulo" value="Control de Acceso" />
+    <ui:define name="body">
+        <h:form>
+
+            <!-- Formulario de autenticación  -->
+            <ice:panelGroup>
+                <f:facet name="header" >
+                    Administración del Catálogo
+                </f:facet>
+                <ice:panelGrid width="100px" columns="1" columnClasses="pnlGrdClass, pnlGrdClass, pnlGrdClassLong">
+                    <ice:outputLabel for="TxtName"
+                                     value="Nombre usuario" />
+                    <ice:inputText id="TxtName"
+                                   size="20"
+                                   maxlength="20"
+                                   value="#{loginBean.usuario}"
+                                   partialSubmit="true"
+                                   required="true">
+
+                        <f:validateLength minimum="1"/>
+                    </ice:inputText>
+                    <ice:message id="nameMsg" for="TxtName"/>
+                </ice:panelGrid>
+
+                <ice:panelGrid width="100px" columns="1" columnClasses="pnlGrdClass, pnlGrdClass, pnlGrdClassLong">
+                    <ice:outputLabel for="TxtPw"
+                                     value="Contraseña" />
+                    <ice:inputSecret id="TxtPw"
+                                     maxlength="20"
+                                     size="20"
+                                     value="#{loginBean.contraseña}"
+                                     partialSubmit="true"
+                                     required="true">
+                        <f:validateLength minimum="6" maximum="15" />
+                    </ice:inputSecret>
+                    <ice:message id="pwMsg" for="TxtPw"/>
+                </ice:panelGrid>
+
+                <ice:commandButton value="Ingresar" action="#{loginBean.login}"/>
+            </ice:panelGroup>
+
+        </h:form>
+
+        <h:form>
+
+            <!-- Se establecen las propiedades para el panel popup de error-->
+            <ice:panelPopup id="popupDiv"
+                            rendered="true"
+                            visible="#{loginBean.error}"
+                            modal="true">
+
+                <f:facet name="header">
+                    <ice:panelGrid columns="2" columnClasses="er1,er2">
+                        <ice:outputText value="Error de ingreso"/>
+                    </ice:panelGrid>
+                </f:facet>
+                <f:facet name="body">
+
+                    <h:panelGroup>
+
+                        <ice:panelGrid width="100%" cellpadding="0" columns="2" style="background-position: center"
+                                       cellspacing="10" styleClass="popupModalBody">
+                            <ice:graphicImage url="./resources/img/graphics/error.png"/>
+                            <ice:outputText
+                                value="#{loginBean.mensajeError}"/>
+                        </ice:panelGrid>
+                        <ice:panelGrid width="100%" cellpadding="0" columns="1" style="background-position: center"
+                                       cellspacing="0" styleClass="popupModalBody">
+
+                            <ice:commandButton id="closeModal"
+                                               actionListener="#{loginBean.cerrarPanelError}"
+                                               value="Cerrar" style="z-index:2;"/>
+                        </ice:panelGrid>
+                    </h:panelGroup>
+                </f:facet>
+            </ice:panelPopup>
+
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>

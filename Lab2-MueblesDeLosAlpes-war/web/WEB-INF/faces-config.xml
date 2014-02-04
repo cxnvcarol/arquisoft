@@ -27,7 +27,7 @@
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>administrador</from-outcome>
+            <from-outcome>login</from-outcome>
             <to-view-id>/catalogo.jsf</to-view-id>
         </navigation-case>
     </navigation-rule>
